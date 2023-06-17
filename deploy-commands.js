@@ -1,5 +1,5 @@
 const { REST, Routes } = require('discord.js');
-const { DISCORD_CLIENT_ID, DISCORD_BOT_TOKEN, DISCORD_GUILD_ID } = require('./config');
+const { DISCORD_CLIENT_ID, DISCORD_BOT_TOKEN } = require('./config');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -33,18 +33,6 @@ const rest = new REST().setToken(DISCORD_BOT_TOKEN);
 (async () => {
   try {
     console.log(`Started refreshing ${commands.length} application (/) commands.`);
-
-    // 获取现有指令
-    const existingCommands = await rest.get(
-      Routes.applicationGuildCommands(DISCORD_CLIENT_ID, DISCORD_GUILD_ID),
-    );
-
-    // 删除现有指令
-    for (const command of existingCommands) {
-      await rest.delete(
-        Routes.applicationGuildCommand(DISCORD_CLIENT_ID, DISCORD_GUILD_ID, command.id),
-      );
-    }
 
     // The put method is used to fully refresh all commands in the guild with the current set
     const data = await rest.put(Routes.applicationCommands(DISCORD_CLIENT_ID), {
