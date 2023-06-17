@@ -7,9 +7,7 @@ const { botMessages } = require('./services');
 
 discord.login(DISCORD_BOT_TOKEN);
 
-discord.once('ready', (c) => {
-  console.log(`Ready! Logged in as ${c.user.tag}`);
-});
+discord.once('ready', (c) => {});
 
 discord.on('messageCreate', async (message) => {
   if (message.author?.bot) return;
@@ -17,7 +15,6 @@ discord.on('messageCreate', async (message) => {
   botMessages(message);
 });
 
-// 部分伺服器會需要 HTTP Endpoint
 const app = express();
 
 app.get('/', (req, res) => res.send('Hello World!'));

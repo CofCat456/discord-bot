@@ -8,8 +8,6 @@ function botMessages(message) {
   console.log(DISCORD_MODE);
 
   if (DISCORD_MODE === 'all') {
-    console.log(message.channel.id);
-    console.log(DISCORD_CHANNEL_ID);
     if (message.channel.id === DISCORD_CHANNEL_ID) {
       channelMessage(message);
     }
