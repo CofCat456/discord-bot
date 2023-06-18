@@ -10,7 +10,7 @@ const {
 const { openAI } = require('../connection');
 
 async function aiAssistant(messages) {
-  const { data } = await openAI.createChatCompletion({
+  await openAI.createChatCompletion({
     model: OPEN_AI_GPT_MODEL,
     messages,
     max_tokens: OPEN_AI_MAX_TOKENS,
@@ -20,9 +20,7 @@ async function aiAssistant(messages) {
     presence_penalty: OPEN_AI_PRESENCE_PENALTY,
   });
 
-  const [choices] = data.choices;
-
-  return choices.message.content || '抱歉，我沒有話可說了。';
+  return '抱歉，我沒有話可說了。';
 }
 
 module.exports = aiAssistant;

@@ -19,6 +19,7 @@ async function channelMessage(message) {
       const channelMessageData = await message.channel.messages.fetch({
         limit: DISCORD_CHANNEL_MAX_MESSAGE + 1,
       });
+
       const reverseMessages = channelMessageData.reverse();
       messages = reverseMessages
         .map((msg) => {
@@ -47,8 +48,6 @@ async function channelMessage(message) {
 
     message.reply(text);
   } catch (error) {
-    console.log(error);
-
     await cacheMsg.delete();
 
     message.reply(
